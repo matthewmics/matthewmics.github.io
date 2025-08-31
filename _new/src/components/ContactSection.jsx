@@ -1,10 +1,52 @@
 import { Github, Linkedin, Mail, MapPin, Phone, Send } from 'lucide-react'
 import { cn } from '../lib/utils'
+import React from 'react'
+import emailjs from '@emailjs/browser'
+import toast from 'react-hot-toast'
 
 const ContactSection = () => {
+    const [isSending, setIsSending] = React.useState(false)
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const [formData, setFormData] = React.useState({
+        name: '',
+        email: '',
+        message: '',
+    })
+
+    const handleSubmit = e => {
+        e.preventDefault()
+
+        setIsSending(true)
+
+        emailjs
+            .send(
+                import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+                {
+                    user_name: formData.name,
+                    user_email: formData.email,
+                    message: formData.message,
+                },
+                import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+            )
+            .then(
+                () => {
+                    toast.success('Message sent successfully!')
+                },
+                error => {
+                    console.error(error)
+                    toast.error('Failed to send message')
+                },
+            )
+            .finally(() => {
+                setIsSending(false)
+                setFormData({ name: '', email: '', message: '' })
+            })
+    }
+
+    const handleInputChange = e => {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
     }
 
     return (
@@ -88,7 +130,7 @@ const ContactSection = () => {
 
                     <div className='bg-card p-8 rounded-lg shadow-xs'>
                         <h3 className='text-2xl font-semibold mb-6'>Send a Message</h3>
-                        <form className='space-y-6'>
+                        <form onSubmit={handleSubmit} className='space-y-6'>
                             <div>
                                 <label htmlFor='name' className='block text-sm font-medium mb-2'>
                                     Your Name
@@ -99,6 +141,8 @@ const ContactSection = () => {
                                     name='name'
                                     placeholder='Your Name'
                                     required
+                                    value={formData.name}
+                                    onChange={handleInputChange}
                                     className='w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-0'
                                 />
                             </div>
@@ -108,6 +152,8 @@ const ContactSection = () => {
                                     Your Email
                                 </label>
                                 <input
+                                    value={formData.email}
+                                    onChange={handleInputChange}
                                     type='email'
                                     id='email'
                                     name='email'
@@ -122,6 +168,9 @@ const ContactSection = () => {
                                     Your Message
                                 </label>
                                 <textarea
+                                    value={formData.message}
+                                    onChange={handleInputChange}
+                                    rows='5'
                                     id='message'
                                     name='message'
                                     placeholder='Your Message'
@@ -131,12 +180,13 @@ const ContactSection = () => {
                             </div>
 
                             <button
+                                disabled={isSending}
                                 type='submit'
                                 className={cn(
                                     'cosmic-button w-full flex items-center justify-center gap-2',
                                 )}
                             >
-                                Send Message
+                                {isSending ? 'Sending...' : 'Send Message'}
                                 <Send size={16} />
                             </button>
                         </form>
