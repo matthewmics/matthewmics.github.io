@@ -60,7 +60,7 @@ const StarBackground = () => {
 
     return (
         <>
-            <div className='fixed inset-0 overflow-hidden pointer-events-none z-40'>
+            <div className='fixed inset-0 overflow-hidden pointer-events-none z-10'>
                 {stars.map(star => (
                     <div
                         key={star.id}
