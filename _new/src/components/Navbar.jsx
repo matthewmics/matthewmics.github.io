@@ -42,11 +42,23 @@ const Navbar = () => {
         }
     }, [])
 
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'auto'
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto'
+        }
+    }, [isOpen])
+
     return (
         <nav
             className={cn(
                 'fixed w-full z-40 transition-300',
-                isScrolled ? 'py-3 bg-background/80 backdrop-blur-sm shadow-xs' : 'py-5',
+                isScrolled && !isOpen ? 'py-3 bg-background/80 backdrop-blur-sm shadow-xs' : 'py-5',
             )}
         >
             <div className='container flex items-center justify-between'>
@@ -83,7 +95,7 @@ const Navbar = () => {
 
                 <div
                     className={cn(
-                        'fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center',
+                        'fixed top-0 left-0 right-0 bottom-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center',
                         'transition-all duration-300 md:hidden',
                         isOpen
                             ? 'opacity-100 pointer-events-auto'
