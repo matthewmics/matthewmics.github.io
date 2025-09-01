@@ -5,11 +5,15 @@ import { Menu, X } from 'lucide-react'
 const navItems = [
     {
         name: 'Home',
-        href: '#home',
+        href: '#hero',
     },
     {
         name: 'About',
         href: '#about',
+    },
+    {
+        name: 'Work Experience',
+        href: '#work-experience',
     },
     {
         name: 'Skills',
@@ -18,6 +22,10 @@ const navItems = [
     {
         name: 'Projects',
         href: '#projects',
+    },
+    {
+        name: 'Certifications',
+        href: '#certifications',
     },
     {
         name: 'Contact',
@@ -58,7 +66,7 @@ const Navbar = () => {
         <nav
             className={cn(
                 'fixed w-full z-40 transition-300',
-                isScrolled && !isOpen ? 'py-3 bg-background/80 backdrop-blur-sm shadow-xs' : 'py-5',
+                isScrolled && !isOpen ? 'py-4 bg-background/80 backdrop-blur-sm shadow-xs' : 'py-5',
             )}
         >
             <div className='container flex items-center justify-between'>
@@ -69,7 +77,7 @@ const Navbar = () => {
                 </a>
 
                 {/* desktop version */}
-                <div className='hidden md:flex space-x-8'>
+                <div className='hidden min-[1024px]:flex space-x-8'>
                     {navItems.map((item, index) => (
                         <a
                             key={index}
@@ -87,7 +95,7 @@ const Navbar = () => {
                     onClick={() => {
                         setIsOpen(prev => !prev)
                     }}
-                    className='md:hidden p-2 text-foreground'
+                    className='min-[1024px]:hidden p-2 text-foreground'
                     aria-label={isOpen ? 'Close menu' : 'Open menu'}
                 >
                     {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -96,7 +104,7 @@ const Navbar = () => {
                 <div
                     className={cn(
                         'fixed top-0 left-0 right-0 bottom-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center',
-                        'transition-all duration-300 md:hidden',
+                        'transition-all duration-300 min-[1024px]:hidden',
                         isOpen
                             ? 'opacity-100 pointer-events-auto'
                             : 'opacity-0 pointer-events-none',
