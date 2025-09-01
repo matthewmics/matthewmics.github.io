@@ -13,10 +13,11 @@ const AboutMe = () => {
                         <h3 className='text-2xl font-semibold'>Passionate Full-Stack Developer</h3>
                         <p className='text-muted-foreground'>
                             With 7 years of experience, I specialize in building web, mobile, and
-                            desktop applications that are not only functional but also user-friendly
-                            and visually appealing. My expertise spans a variety of technologies,
-                            including JavaScript, React, Node.js, Python, and more. I thrive on
-                            turning complex problems into simple, beautiful solutions.
+                            robotic process automation (RPA) applications that are not only
+                            functional but also user-friendly and visually appealing. My expertise
+                            spans a variety of technologies, including JavaScript, React, Node.js,
+                            C#, and more. I thrive on turning complex problems into simple,
+                            beautiful solutions.
                         </p>
 
                         <p className='text-muted-foreground'>
