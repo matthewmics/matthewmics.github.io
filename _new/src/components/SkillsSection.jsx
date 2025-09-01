@@ -38,6 +38,11 @@ const skills = [
         level: 80,
         category: 'frontend',
     },
+    {
+        name: 'JQuery',
+        level: 70,
+        category: 'frontend',
+    },
 
     //backend
     {
@@ -53,6 +58,11 @@ const skills = [
     {
         name: 'Laravel',
         level: 75,
+        category: 'backend',
+    },
+    {
+        name: 'Java',
+        level: 70,
         category: 'backend',
     },
     {
@@ -84,6 +94,11 @@ const skills = [
         level: 75,
         category: 'automation',
     },
+    {
+        name: 'Selenium WebDriver',
+        level: 65,
+        category: 'automation',
+    },
 
     //tools
     {
@@ -94,6 +109,16 @@ const skills = [
     {
         name: 'Docker',
         level: 70,
+        category: 'tools',
+    },
+    {
+        name: 'AWS',
+        level: 60,
+        category: 'tools',
+    },
+    {
+        name: 'CPanel',
+        level: 65,
         category: 'tools',
     },
     {
@@ -121,7 +146,7 @@ const SkillsSection = () => {
     const [activeCategory, setActiveCategory] = React.useState('all')
 
     return (
-        <section id='skills' className='py-24 px-4 relative  z-10'>
+        <section id='skills' className='py-24 px-4 relative z-20'>
             <div className='container mx-auto max-w-5xl'>
                 <h2 className='text-3xl md:text-4xl font-bold mb-12 text-center'>
                     My <span className='text-primary'>Skills</span>
