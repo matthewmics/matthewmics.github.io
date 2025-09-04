@@ -16,6 +16,15 @@ const ThemeToggle = () => {
         }
     }, [])
 
+    useEffect(() => {
+        const isFirstVisit = localStorage.getItem('isFirstVisit')
+
+        if (!isFirstVisit) {
+            localStorage.setItem('isFirstVisit', 'false')
+            toggleTheme()
+        }
+    }, [])
+
     const toggleTheme = () => {
         if (isDarkMode) {
             document.documentElement.classList.remove('dark')
