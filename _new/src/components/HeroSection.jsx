@@ -22,7 +22,7 @@ const HeroSection = () => {
                     </h1>
 
                     <p className='text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto opacity-0 animate-fade-in-delay-3 select-none'>
-                        👋 Hi, I’m a software developer with about 7 years of experience creating
+                        👋 Hi, I’m a software developer with about 8 years of experience creating
                         apps for the web, mobile, and desktop. I love building things that people
                         actually use—whether it’s a simple tool that makes someone’s day easier or a
                         full product that helps a business grow.
