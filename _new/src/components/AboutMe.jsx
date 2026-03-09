@@ -12,7 +12,7 @@ const AboutMe = () => {
                     <div className='space-y-6'>
                         <h3 className='text-2xl font-semibold'>Passionate Full-Stack Developer</h3>
                         <p className='text-muted-foreground'>
-                            With 7 years of experience, I specialize in building web, mobile, and
+                            With 8 years of experience, I specialize in building web, mobile, and
                             robotic process automation (RPA) applications that are not only
                             functional but also user-friendly and visually appealing. My expertise
                             spans a variety of technologies, including JavaScript, React, Node.js,
