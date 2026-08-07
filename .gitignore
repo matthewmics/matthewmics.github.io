@@ -1,0 +1,13 @@
+# NOTE: the repository root is the GitHub Pages deploy target, so the built
+# site (index.html, assets/, certs/, projects/, *.pdf) IS committed here on
+# purpose. Do not ignore it. Source lives in site/.
+
+node_modules
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea
+.vscode/*
+!.vscode/extensions.json
