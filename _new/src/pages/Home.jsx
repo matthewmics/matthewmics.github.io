@@ -1,5 +1,4 @@
 import StarBackground from '../components/StarBackground'
-import ThemeToggle from '../components/ThemeToggle'
 import Navbar from '../components/Navbar'
 import HeroSection from '../components/HeroSection'
 import AboutMe from '../components/AboutMe'
@@ -12,15 +11,12 @@ import WorkExperience from '../components/WorkExperience'
 
 const Home = () => {
     return (
-        <div className='min-h-screen bg-background text-foreground overflow-x-hidden'>
-            {/* Theme toggle */}
-            <ThemeToggle />
-            {/* Background Effects */}
+        <div className='relative min-h-svh overflow-x-hidden'>
+            {/* Background effects (the theme toggle now lives in the navbar) */}
             <StarBackground />
-            {/* Navbar  */}
+
             <Navbar />
 
-            {/* Main Content */}
             <main>
                 <HeroSection />
                 <AboutMe />
@@ -31,7 +27,6 @@ const Home = () => {
                 <ContactSection />
             </main>
 
-            {/* Footer  */}
             <Footer />
         </div>
     )

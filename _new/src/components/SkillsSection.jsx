@@ -1,136 +1,42 @@
-import React from 'react'
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { cn } from '../lib/utils'
+import SectionHeading from './ui/SectionHeading'
 
 const skills = [
     //frontend
-    {
-        name: 'HTML/CSS',
-        level: 95,
-        category: 'frontend',
-    },
-    {
-        name: 'JavaScript',
-        level: 90,
-        category: 'frontend',
-    },
-    {
-        name: 'TypeScript',
-        level: 85,
-        category: 'frontend',
-    },
-    {
-        name: 'React',
-        level: 85,
-        category: 'frontend',
-    },
-    {
-        name: 'Angular',
-        level: 85,
-        category: 'frontend',
-    },
-    {
-        name: 'Vue.js',
-        level: 75,
-        category: 'frontend',
-    },
-    {
-        name: 'Tailwind CSS',
-        level: 80,
-        category: 'frontend',
-    },
-    {
-        name: 'JQuery',
-        level: 70,
-        category: 'frontend',
-    },
+    { name: 'HTML/CSS', level: 95, category: 'frontend' },
+    { name: 'JavaScript', level: 90, category: 'frontend' },
+    { name: 'TypeScript', level: 85, category: 'frontend' },
+    { name: 'React', level: 85, category: 'frontend' },
+    { name: 'Angular', level: 85, category: 'frontend' },
+    { name: 'Vue.js', level: 75, category: 'frontend' },
+    { name: 'Tailwind CSS', level: 80, category: 'frontend' },
+    { name: 'JQuery', level: 70, category: 'frontend' },
 
     //backend
-    {
-        name: 'NestJS',
-        level: 85,
-        category: 'backend',
-    },
-    {
-        name: '.NET Core',
-        level: 80,
-        category: 'backend',
-    },
-    {
-        name: 'Laravel',
-        level: 75,
-        category: 'backend',
-    },
-    {
-        name: 'Java',
-        level: 70,
-        category: 'backend',
-    },
-    {
-        name: 'SQL',
-        level: 80,
-        category: 'backend',
-    },
+    { name: 'NestJS', level: 85, category: 'backend' },
+    { name: '.NET Core', level: 80, category: 'backend' },
+    { name: 'Laravel', level: 75, category: 'backend' },
+    { name: 'Java', level: 70, category: 'backend' },
+    { name: 'SQL', level: 80, category: 'backend' },
 
     //mobile
-    {
-        name: 'React Native',
-        level: 75,
-        category: 'mobile',
-    },
-    {
-        name: 'Xamarin',
-        level: 70,
-        category: 'mobile',
-    },
+    { name: 'React Native', level: 75, category: 'mobile' },
+    { name: 'Xamarin', level: 70, category: 'mobile' },
 
     //automation
-    {
-        name: 'UiPath',
-        level: 70,
-        category: 'automation',
-    },
-    {
-        name: 'Cypress',
-        level: 75,
-        category: 'automation',
-    },
-    {
-        name: 'Selenium WebDriver',
-        level: 65,
-        category: 'automation',
-    },
+    { name: 'UiPath', level: 70, category: 'automation' },
+    { name: 'Cypress', level: 75, category: 'automation' },
+    { name: 'Selenium WebDriver', level: 65, category: 'automation' },
 
     //tools
-    {
-        name: 'Git/GitHub',
-        level: 85,
-        category: 'tools',
-    },
-    {
-        name: 'Docker',
-        level: 70,
-        category: 'tools',
-    },
-    {
-        name: 'AWS',
-        level: 60,
-        category: 'tools',
-    },
-    {
-        name: 'CPanel',
-        level: 65,
-        category: 'tools',
-    },
-    {
-        name: 'VS Code',
-        level: 80,
-        category: 'tools',
-    },
-    {
-        name: 'Postman',
-        level: 75,
-        category: 'tools',
-    },
+    { name: 'Git/GitHub', level: 85, category: 'tools' },
+    { name: 'Docker', level: 70, category: 'tools' },
+    { name: 'AWS', level: 60, category: 'tools' },
+    { name: 'CPanel', level: 65, category: 'tools' },
+    { name: 'VS Code', level: 80, category: 'tools' },
+    { name: 'Postman', level: 75, category: 'tools' },
 ]
 
 const categories = [
@@ -143,59 +49,93 @@ const categories = [
 ]
 
 const SkillsSection = () => {
-    const [activeCategory, setActiveCategory] = React.useState('all')
+    const [activeCategory, setActiveCategory] = useState('all')
+
+    const visibleSkills = skills.filter(
+        skill => activeCategory === 'all' || skill.category === activeCategory,
+    )
 
     return (
-        <section id='skills' className='py-24 px-4 relative z-20'>
-            <div className='container mx-auto max-w-5xl'>
-                <h2 className='text-3xl md:text-4xl font-bold mb-12 text-center'>
-                    My <span className='text-primary'>Skills</span>
-                </h2>
+        <section id='skills' className='relative scroll-mt-24 py-24 md:py-32'>
+            <div className='container'>
+                <SectionHeading
+                    eyebrow='Toolbox'
+                    title='My'
+                    highlight='Skills'
+                    description='The languages, frameworks, and tools I reach for most often.'
+                />
 
-                <div className='flex flex-wrap justify-center mb-12 gap-4'>
-                    {categories.map(category => (
-                        <button
-                            key={category.id}
-                            className={cn(
-                                `px-5 py-2 rounded-full transition-colors capitalize cursor-pointer`,
-                                activeCategory === category.id
-                                    ? 'bg-primary text-primary-foreground'
-                                    : 'bg-secondary/10 text-foreground hover:bg-secondary/90',
-                            )}
-                            onClick={() => setActiveCategory(category.id)}
-                        >
-                            {category.name}
-                        </button>
-                    ))}
+                {/* Category filter */}
+                <div className='mt-12 flex flex-wrap justify-center gap-2'>
+                    {categories.map(category => {
+                        const isActive = activeCategory === category.id
+                        return (
+                            <button
+                                key={category.id}
+                                type='button'
+                                onClick={() => setActiveCategory(category.id)}
+                                aria-pressed={isActive}
+                                className={cn(
+                                    'relative cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-200',
+                                    isActive
+                                        ? 'border-transparent text-primary-foreground'
+                                        : 'border-border bg-card/50 text-muted-foreground backdrop-blur-sm hover:border-primary/40 hover:text-foreground',
+                                )}
+                            >
+                                {isActive && (
+                                    <motion.span
+                                        layoutId='skill-filter-pill'
+                                        className='absolute inset-0 -z-10 rounded-full bg-primary'
+                                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                                    />
+                                )}
+                                {category.name}
+                            </button>
+                        )
+                    })}
                 </div>
 
-                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-                    {skills
-                        .filter(
-                            skill => activeCategory === 'all' || skill.category === activeCategory,
-                        )
-                        .map((skill, index) => (
-                            <div
-                                key={index}
-                                className='bg-card/90 p-6 rounded-lg shadow-xs card-hover'
+                {/* Skill grid */}
+                <motion.div
+                    layout
+                    className='mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'
+                >
+                    <AnimatePresence mode='popLayout'>
+                        {visibleSkills.map(skill => (
+                            <motion.article
+                                key={skill.name}
+                                layout
+                                initial={{ opacity: 0, scale: 0.92 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.92 }}
+                                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                                className='surface surface-hover group p-5 text-left'
                             >
-                                <div className='text-left mb-4'>
-                                    <h3 className='font-semibold text-lg'>{skill.name}</h3>
-                                </div>
-                                <div className='w-full bg-secondary/50 h-2 rounded-full overflow-hidden'>
-                                    <div
-                                        className='bg-primary h-2 rounded-full origin-left animate-[grow_1.5s_ease-out]'
-                                        style={{ width: `${skill.level}%` }}
-                                    />
-                                </div>
-                                <div className='text-right mt-1'>
-                                    <span className='text-sm text-muted-foreground'>
+                                <div className='flex items-baseline justify-between gap-3'>
+                                    <h3 className='font-display text-base font-semibold'>
+                                        {skill.name}
+                                    </h3>
+                                    <span className='font-mono text-xs text-muted-foreground transition-colors duration-300 group-hover:text-primary'>
                                         {skill.level}%
                                     </span>
                                 </div>
-                            </div>
+
+                                <div className='mt-4 h-1.5 w-full overflow-hidden rounded-full bg-foreground/10'>
+                                    <motion.div
+                                        className='h-full rounded-full bg-linear-to-r from-primary to-accent'
+                                        initial={{ width: 0 }}
+                                        whileInView={{ width: `${skill.level}%` }}
+                                        viewport={{ once: true, amount: 0.6 }}
+                                        transition={{
+                                            duration: 1,
+                                            ease: [0.22, 1, 0.36, 1],
+                                        }}
+                                    />
+                                </div>
+                            </motion.article>
                         ))}
-                </div>
+                    </AnimatePresence>
+                </motion.div>
             </div>
         </section>
     )

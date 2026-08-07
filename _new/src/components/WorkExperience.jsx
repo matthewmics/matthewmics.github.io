@@ -1,3 +1,7 @@
+import { Building2, MapPin } from 'lucide-react'
+import Reveal from './ui/Reveal'
+import SectionHeading from './ui/SectionHeading'
+
 const experiences = [
     {
         company: 'Pixelhouse',
@@ -30,7 +34,7 @@ const experiences = [
         ],
     },
     {
-        company: 'Connext Global Soluttions',
+        company: 'Connext Global Solutions',
         role: 'Applications Developer',
         duration: '2021 June - 2022 June',
         location: 'Angeles, Philippines',
@@ -78,37 +82,95 @@ const experiences = [
 
 const WorkExperience = () => {
     return (
-        <section id='work-experience'>
-            <div className='container max-w-5xl py-24 relative z-20'>
-                <h2 className='text-3xl md:text-4xl font-bold mb-4 text-center'>
-                    Work <span className='text-primary'>Experience</span>
-                </h2>
+        <section id='work-experience' className='relative scroll-mt-24 py-24 md:py-32'>
+            <div className='container'>
+                <SectionHeading
+                    eyebrow='Career'
+                    title='Work'
+                    highlight='Experience'
+                    description='A summary of my professional work experience'
+                />
 
-                <p className='text-center mb-12 max-w-2xl mx-auto'>
-                    A summary of my professional work experience
-                </p>
+                <div className='relative mx-auto mt-16 max-w-4xl'>
+                    {/* Timeline rail */}
+                    <span
+                        aria-hidden='true'
+                        className='absolute top-2 bottom-2 left-[15px] w-px bg-linear-to-b from-primary/60 via-border to-transparent sm:left-[19px]'
+                    />
 
-                <div className='flex flex-col gap-8'>
-                    {experiences.map((experience, index) => (
-                        <div key={index} className='bg-card/90 p-6 rounded-lg shadow-xs card-hover'>
-                            <p className='text-sm text-muted text-start mb-4'>
-                                {experience.duration}
-                            </p>
-                            <h3 className='text-2xl font-medium text-start'>{experience.role}</h3>
-                            <p className='text-sm text-start'>
-                                {experience.company} | {experience.location}
-                            </p>
-                            <hr className='my-4' />
-                            <p className='text-sm text-muted-foreground'></p>
-                            <ul className='list-disc list-inside mt-2'>
-                                {experience.descriptions.map((desc, i) => (
-                                    <li key={i} className='text-md text-start'>
-                                        {desc}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
+                    <ol className='flex flex-col gap-6'>
+                        {experiences.map((experience, index) => {
+                            const isCurrent = experience.duration.includes('Present')
+
+                            return (
+                                <Reveal
+                                    as='li'
+                                    key={`${experience.company}-${experience.duration}`}
+                                    delay={Math.min(index, 3) * 0.06}
+                                    className='relative pl-12 sm:pl-16'
+                                >
+                                    {/* Node */}
+                                    <span className='absolute top-6 left-0 grid size-8 place-items-center rounded-full border border-border bg-card sm:size-10'>
+                                        {isCurrent ? (
+                                            <span className='relative flex size-2.5'>
+                                                <span className='absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-75' />
+                                                <span className='relative inline-flex size-2.5 rounded-full bg-primary' />
+                                            </span>
+                                        ) : (
+                                            <Building2 className='size-3.5 text-muted-foreground sm:size-4' />
+                                        )}
+                                    </span>
+
+                                    <article className='surface surface-hover p-6 text-left sm:p-7'>
+                                        <div className='flex flex-wrap items-center gap-3'>
+                                            <span className='chip font-mono'>
+                                                {experience.duration}
+                                            </span>
+                                            {isCurrent && (
+                                                <span className='inline-flex items-center rounded-full bg-emerald-500/10 px-2.5 py-1 font-mono text-[11px] font-medium text-emerald-600 dark:text-emerald-400'>
+                                                    Current
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        <h3 className='mt-4 text-xl font-semibold sm:text-2xl'>
+                                            {experience.role}
+                                        </h3>
+
+                                        <p className='mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground'>
+                                            <span className='font-medium text-foreground/90'>
+                                                {experience.company}
+                                            </span>
+                                            <span
+                                                aria-hidden='true'
+                                                className='hidden opacity-40 sm:inline'
+                                            >
+                                                •
+                                            </span>
+                                            <span className='inline-flex items-center gap-1'>
+                                                <MapPin className='size-3.5' />
+                                                {experience.location}
+                                            </span>
+                                        </p>
+
+                                        <ul className='mt-5 flex flex-col gap-3 border-t border-border pt-5'>
+                                            {experience.descriptions.map((desc, i) => (
+                                                <li key={i} className='flex gap-3 text-sm'>
+                                                    <span
+                                                        aria-hidden='true'
+                                                        className='mt-[7px] size-1.5 shrink-0 rounded-full bg-primary/70'
+                                                    />
+                                                    <span className='text-pretty text-muted-foreground'>
+                                                        {desc}
+                                                    </span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </article>
+                                </Reveal>
+                            )
+                        })}
+                    </ol>
                 </div>
             </div>
         </section>

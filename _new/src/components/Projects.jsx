@@ -1,3 +1,8 @@
+import { ArrowUpRight, Github } from 'lucide-react'
+import { cn } from '../lib/utils'
+import Reveal from './ui/Reveal'
+import SectionHeading from './ui/SectionHeading'
+
 const projects = [
     {
         id: 1,
@@ -13,7 +18,7 @@ const projects = [
         description: 'A web application to manage school inventory.',
         image: '/projects/inventory-main.png',
         tags: ['React', 'Laravel', 'PostgreSQL', 'Semantic UI'],
-        githubUrl: ['https://github.com/matthewmics/spcf-inventory-system-api'],
+        githubUrl: 'https://github.com/matthewmics/spcf-inventory-system-api',
     },
     {
         id: 3,
@@ -28,6 +33,8 @@ const projects = [
         title: 'Spike Roll',
         description: 'A multiplayer mobile game built with Unity.',
         image: '/projects/spikeroll.png',
+        // Near-square source; centring keeps the gameplay in frame.
+        imagePosition: 'object-center',
         tags: ['Unity', 'C#', 'Multiplayer'],
         githubUrl: 'https://github.com/matthewmics/spikeroll',
     },
@@ -35,76 +42,89 @@ const projects = [
 
 const Projects = () => {
     return (
-        <section id='projects' className='py-24 px-4 relative z-20'>
-            <div className='container mx-auto max-w-5xl'>
-                <h2 className='text-3xl md:text-4xl font-bold mb-4 text-center'>
-                    Featured <span className='text-primary'>Projects</span>
-                </h2>
-                <p className='text-center text-muted-foreground mb-12 max-w-2xl mx-auto'>
-                    A selection of projects showcasing my skills and experience in web development
-                    and software engineering.
-                </p>
+        <section id='projects' className='relative scroll-mt-24 py-24 md:py-32'>
+            <div className='container'>
+                <SectionHeading
+                    eyebrow='Portfolio'
+                    title='Featured'
+                    highlight='Projects'
+                    description='A selection of projects showcasing my skills and experience in web development and software engineering.'
+                />
 
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-                    {projects.map(project => (
-                        <div
-                            key={project.id}
-                            className='group bg-card/90 rounded-lg overflow-hidden shadow-xs card-hover flex flex-col'
-                        >
-                            <div className='h-48 overflow-hidden'>
-                                <img
-                                    src={project.image}
-                                    alt={project.title}
-                                    className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'
-                                />
-                            </div>
+                <div className='mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+                    {projects.map((project, index) => (
+                        <Reveal key={project.id} delay={Math.min(index, 3) * 0.08}>
+                            <article className='surface surface-hover group flex h-full flex-col overflow-hidden text-left'>
+                                {/* Preview */}
+                                <div className='relative aspect-16/10 overflow-hidden bg-foreground/5'>
+                                    <img
+                                        src={project.image}
+                                        alt={`${project.title} screenshot`}
+                                        loading='lazy'
+                                        className={cn(
+                                            'size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105',
+                                            project.imagePosition ?? 'object-top',
+                                        )}
+                                    />
 
-                            <h3 className='text-xl font-semibold mb-1 mt-6'>{project.title}</h3>
-                            <p className='text-sm text-muted-foreground mb-4 grow px-4'>
-                                {project.description}
-                            </p>
-
-                            <div className='p-2'>
-                                <div className='flex flex-wrap gap-2 mb-4'>
-                                    {project.tags.map((tag, index) => (
-                                        <span
-                                            key={index}
-                                            className=' px-2 py-1 text-xs font-medium rounded-full bg-secondary/10 text-secondary'
+                                    {/* Hover overlay */}
+                                    <div className='absolute inset-0 flex items-end justify-end bg-linear-to-t from-background/90 via-background/20 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
+                                        <a
+                                            href={project.githubUrl}
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                            aria-label={`View ${project.title} on GitHub`}
+                                            className='grid size-10 translate-y-2 place-items-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform duration-300 group-hover:translate-y-0 hover:scale-110'
                                         >
-                                            {tag}
-                                        </span>
-                                    ))}
+                                            <ArrowUpRight className='size-5' />
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className='p-4 pt-0'>
-                                <a
-                                    href={project.githubUrl}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                    className='hover:underline text-sm font-medium flex items-center gap-2 justify-start'
-                                >
-                                    <svg
-                                        xmlns='http://www.w3.org/2000/svg'
-                                        width='24'
-                                        height='24'
-                                        viewBox='0 0 24 24'
-                                        fill='none'
-                                        stroke='currentColor'
-                                        strokeWidth='2'
-                                        strokeLinecap='round'
-                                        strokeLinejoin='round'
-                                        className='lucide lucide-github-icon lucide-github'
+                                {/* Body */}
+                                <div className='flex grow flex-col p-5'>
+                                    <h3 className='font-display text-lg font-semibold transition-colors duration-300 group-hover:text-primary'>
+                                        {project.title}
+                                    </h3>
+                                    <p className='mt-1.5 grow text-sm text-pretty text-muted-foreground'>
+                                        {project.description}
+                                    </p>
+
+                                    <div className='mt-4 flex flex-wrap gap-1.5'>
+                                        {project.tags.map(tag => (
+                                            <span key={tag} className='chip'>
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    <a
+                                        href={project.githubUrl}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                        className='mt-5 inline-flex items-center gap-2 border-t border-border pt-4 text-sm font-medium text-muted-foreground transition-colors hover:text-primary'
                                     >
-                                        <path d='M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4' />
-                                        <path d='M9 18c-4.51 2-5-2-7-2' />
-                                    </svg>
-                                    View on GitHub
-                                </a>
-                            </div>
-                        </div>
+                                        <Github className='size-4' />
+                                        View on GitHub
+                                    </a>
+                                </div>
+                            </article>
+                        </Reveal>
                     ))}
                 </div>
+
+                <Reveal delay={0.1} className='mt-12 flex justify-center'>
+                    <a
+                        href='https://github.com/matthewmics'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='ghost-button group'
+                    >
+                        <Github className='size-4' />
+                        See more on GitHub
+                        <ArrowUpRight className='size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5' />
+                    </a>
+                </Reveal>
             </div>
         </section>
     )

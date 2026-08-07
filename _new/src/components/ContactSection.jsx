@@ -1,17 +1,47 @@
-import { Github, Linkedin, Mail, MapPin, Phone, Send } from 'lucide-react'
-import { cn } from '../lib/utils'
-import React from 'react'
+import { useState } from 'react'
+import { Github, Linkedin, Loader2, Mail, MapPin, Phone, Send } from 'lucide-react'
 import emailjs from '@emailjs/browser'
 import toast from 'react-hot-toast'
+import Reveal from './ui/Reveal'
+import SectionHeading from './ui/SectionHeading'
+
+const contactDetails = [
+    {
+        icon: Mail,
+        label: 'Email',
+        value: 'matthewmics77@gmail.com',
+        href: 'mailto:matthewmics77@gmail.com',
+    },
+    {
+        icon: Phone,
+        label: 'Phone',
+        value: '+63 939 791 3333',
+        href: 'tel:+639397913333',
+    },
+    {
+        icon: MapPin,
+        label: 'Location',
+        value: 'Pampanga, Philippines',
+        href: 'https://www.google.com/maps/place/Pampanga,+Philippines',
+    },
+]
+
+const socials = [
+    {
+        icon: Linkedin,
+        label: 'LinkedIn',
+        href: 'https://www.linkedin.com/in/matthew-miclat-a50835167',
+    },
+    { icon: Github, label: 'GitHub', href: 'https://github.com/matthewmics' },
+]
+
+const inputClasses =
+    'w-full rounded-xl border border-input bg-background/60 px-4 py-3 text-sm placeholder:text-muted-foreground/70 ' +
+    'transition-colors duration-200 outline-none focus:border-primary focus:bg-background'
 
 const ContactSection = () => {
-    const [isSending, setIsSending] = React.useState(false)
-
-    const [formData, setFormData] = React.useState({
-        name: '',
-        email: '',
-        message: '',
-    })
+    const [isSending, setIsSending] = useState(false)
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' })
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -46,151 +76,153 @@ const ContactSection = () => {
 
     const handleInputChange = e => {
         const { name, value } = e.target
-        setFormData({ ...formData, [name]: value })
+        setFormData(prev => ({ ...prev, [name]: value }))
     }
 
     return (
-        <section id='contact' className='py-24 px-4 relative z-10'>
-            <div className='container mx-auto max-w-5xl'>
-                <h2 className='text-3xl md:text-4xl font-bold mb-4 text-center'>
-                    Get In<span className='text-primary'> Touch</span>
-                </h2>
+        <section id='contact' className='relative scroll-mt-24 py-24 md:py-32'>
+            <div className='container'>
+                <SectionHeading
+                    eyebrow='Contact'
+                    title='Get In'
+                    highlight='Touch'
+                    description="Feel free to reach out. I'm open to opportunities, collaborations, or just a friendly chat!"
+                />
 
-                <p className='text-center mb-12 max-w-2xl mx-auto'>
-                    Feel free to reach out. I'm open to opportunities, collaborations, or just a
-                    friendly chat!
-                </p>
-
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
-                    <div className='space-y-8'>
-                        <h3 className='text-2xl font-semibold mb-6'>Contact Information</h3>
-
-                        <div className='space-y-6 justify-center flex flex-col items-center'>
-                            <div className='flex items-center space-x-4'>
-                                <div className='p-3 rounded-full bg-primary/10'>
-                                    <Mail className='w-6 h-6 text-primary' />
-                                </div>
-                                <div>
-                                    <a
-                                        href='mailto:matthewmics77@gmail.com'
-                                        className='hover:text-primary transition-colors'
-                                    >
-                                        matthewmics77@gmail.com
-                                    </a>
-                                </div>
-                            </div>
-                            <div className='flex items-center space-x-4'>
-                                <div className='p-3 rounded-full bg-primary/10'>
-                                    <Phone className='w-6 h-6 text-primary' />
-                                </div>
-                                <div>
-                                    <a
-                                        href='tel:+639397913333'
-                                        className='hover:text-primary transition-colors'
-                                    >
-                                        +63 939 791 3333
-                                    </a>
-                                </div>
-                            </div>
-                            <div className='flex items-center space-x-4'>
-                                <div className='p-3 rounded-full bg-primary/10'>
-                                    <MapPin className='w-6 h-6 text-primary' />
-                                </div>
-                                <div>
-                                    <a
-                                        href='https://www.google.com/maps/place/Pampanga,+Philippines'
-                                        className='hover:text-primary transition-colors'
-                                    >
-                                        Pampanga, Philippines
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='pt-8'>
-                            <h4 className='font-medium mb-4'>Connect With Me</h4>
-                            <div className='flex space-x-4 justify-center'>
+                <div className='mx-auto mt-16 grid max-w-5xl gap-8 lg:grid-cols-5'>
+                    {/* Details */}
+                    <div className='flex flex-col gap-4 lg:col-span-2'>
+                        {contactDetails.map(({ icon: Icon, label, value, href }, index) => (
+                            <Reveal key={label} delay={index * 0.08}>
                                 <a
-                                    href='https://www.linkedin.com/in/matthew-miclat-a50835167'
-                                    target='_blank'
+                                    href={href}
+                                    target={href.startsWith('http') ? '_blank' : undefined}
                                     rel='noreferrer'
+                                    className='surface surface-hover group flex items-center gap-4 p-5 text-left'
                                 >
-                                    <Linkedin />
+                                    <span className='grid size-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground'>
+                                        <Icon className='size-5' />
+                                    </span>
+                                    <span className='min-w-0'>
+                                        <span className='block font-mono text-[11px] tracking-[0.16em] text-muted-foreground uppercase'>
+                                            {label}
+                                        </span>
+                                        <span className='block truncate text-sm font-medium transition-colors duration-300 group-hover:text-primary'>
+                                            {value}
+                                        </span>
+                                    </span>
                                 </a>
-                                <a
-                                    href='https://github.com/matthewmics'
-                                    target='_blank'
-                                    rel='noreferrer'
-                                >
-                                    <Github />
-                                </a>
+                            </Reveal>
+                        ))}
+
+                        <Reveal delay={0.24}>
+                            <div className='surface p-5 text-left'>
+                                <h4 className='font-display text-sm font-semibold'>
+                                    Connect With Me
+                                </h4>
+                                <div className='mt-4 flex gap-3'>
+                                    {socials.map(({ icon: Icon, label, href }) => (
+                                        <a
+                                            key={label}
+                                            href={href}
+                                            target='_blank'
+                                            rel='noreferrer'
+                                            aria-label={label}
+                                            className='grid size-10 place-items-center rounded-full border border-border text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:text-primary'
+                                        >
+                                            <Icon className='size-[18px]' />
+                                        </a>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
+                        </Reveal>
                     </div>
 
-                    <div className='bg-card/90 p-8 rounded-lg shadow-xs'>
-                        <h3 className='text-2xl font-semibold mb-6'>Send a Message</h3>
-                        <form onSubmit={handleSubmit} className='space-y-6'>
-                            <div>
-                                <label htmlFor='name' className='block text-sm font-medium mb-2'>
-                                    Your Name
-                                </label>
-                                <input
-                                    type='text'
-                                    id='name'
-                                    name='name'
-                                    placeholder='Your Name'
-                                    required
-                                    value={formData.name}
-                                    onChange={handleInputChange}
-                                    className='w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-0'
-                                />
-                            </div>
+                    {/* Form */}
+                    <Reveal delay={0.12} className='lg:col-span-3'>
+                        <div className='surface h-full p-6 text-left sm:p-8'>
+                            <h3 className='font-display text-xl font-semibold sm:text-2xl'>
+                                Send a Message
+                            </h3>
 
-                            <div>
-                                <label htmlFor='email' className='block text-sm font-medium mb-2'>
-                                    Your Email
-                                </label>
-                                <input
-                                    value={formData.email}
-                                    onChange={handleInputChange}
-                                    type='email'
-                                    id='email'
-                                    name='email'
-                                    placeholder='Your Email'
-                                    required
-                                    className='w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden  focus:ring-primary focus:ring-0'
-                                />
-                            </div>
+                            <form onSubmit={handleSubmit} className='mt-6 flex flex-col gap-5'>
+                                <div>
+                                    <label
+                                        htmlFor='name'
+                                        className='mb-2 block text-sm font-medium'
+                                    >
+                                        Your Name
+                                    </label>
+                                    <input
+                                        type='text'
+                                        id='name'
+                                        name='name'
+                                        placeholder='Your Name'
+                                        required
+                                        value={formData.name}
+                                        onChange={handleInputChange}
+                                        className={inputClasses}
+                                    />
+                                </div>
 
-                            <div>
-                                <label htmlFor='message' className='block text-sm font-medium mb-2'>
-                                    Your Message
-                                </label>
-                                <textarea
-                                    value={formData.message}
-                                    onChange={handleInputChange}
-                                    rows='5'
-                                    id='message'
-                                    name='message'
-                                    placeholder='Your Message'
-                                    required
-                                    className='w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-0 resize-none'
-                                />
-                            </div>
+                                <div>
+                                    <label
+                                        htmlFor='email'
+                                        className='mb-2 block text-sm font-medium'
+                                    >
+                                        Your Email
+                                    </label>
+                                    <input
+                                        type='email'
+                                        id='email'
+                                        name='email'
+                                        placeholder='Your Email'
+                                        required
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        className={inputClasses}
+                                    />
+                                </div>
 
-                            <button
-                                disabled={isSending}
-                                type='submit'
-                                className={cn(
-                                    'cosmic-button w-full flex items-center justify-center gap-2',
-                                )}
-                            >
-                                {isSending ? 'Sending...' : 'Send Message'}
-                                <Send size={16} />
-                            </button>
-                        </form>
-                    </div>
+                                <div>
+                                    <label
+                                        htmlFor='message'
+                                        className='mb-2 block text-sm font-medium'
+                                    >
+                                        Your Message
+                                    </label>
+                                    <textarea
+                                        id='message'
+                                        name='message'
+                                        rows='5'
+                                        placeholder='Your Message'
+                                        required
+                                        value={formData.message}
+                                        onChange={handleInputChange}
+                                        className={`${inputClasses} resize-none`}
+                                    />
+                                </div>
+
+                                <button
+                                    type='submit'
+                                    disabled={isSending}
+                                    className='cosmic-button group w-full'
+                                >
+                                    {isSending ? (
+                                        <>
+                                            Sending...
+                                            <Loader2 className='size-4 animate-spin' />
+                                        </>
+                                    ) : (
+                                        <>
+                                            Send Message
+                                            <Send className='size-4 transition-transform duration-300 group-hover:translate-x-1' />
+                                        </>
+                                    )}
+                                </button>
+                            </form>
+                        </div>
+                    </Reveal>
                 </div>
             </div>
         </section>
