@@ -26,7 +26,7 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
-    // Scroll spy — highlight whichever section currently owns the viewport.
+    // Scroll spy: highlight whichever section currently owns the viewport.
     useEffect(() => {
         const sections = navItems
             .map(item => document.querySelector(item.href))

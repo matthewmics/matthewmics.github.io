@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 
 /**
  * Fixed, purely decorative backdrop that sits behind all content:
- *   1. aurora blobs   — soft colour wash, visible in both themes
- *   2. grid lines     — faint technical grid, masked out towards the bottom
- *   3. stars/meteors  — dark-theme only starfield
+ *   1. aurora blobs   : soft colour wash, visible in both themes
+ *   2. grid lines     : faint technical grid, masked out towards the bottom
+ *   3. stars/meteors  : dark-theme only starfield
  */
 const StarBackground = () => {
     const [stars, setStars] = useState([])
@@ -75,7 +75,7 @@ const StarBackground = () => {
             {/* Technical grid */}
             <div className='grid-lines absolute inset-0' />
 
-            {/* Starfield — dark theme only */}
+            {/* Starfield, dark theme only */}
             <div className='absolute inset-0 opacity-0 transition-opacity duration-700 dark:opacity-100'>
                 {stars.map(star => (
                     <div

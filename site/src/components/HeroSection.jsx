@@ -120,7 +120,7 @@ const HeroSection = () => {
                         >
                             👋 Hi, I&rsquo;m a software developer with about 8 years of experience
                             creating apps for the web, mobile, and desktop. I love building things
-                            that people actually use—whether it&rsquo;s a simple tool that makes
+                            that people actually use, whether it&rsquo;s a simple tool that makes
                             someone&rsquo;s day easier or a full product that helps a business grow.
                         </motion.p>
 
