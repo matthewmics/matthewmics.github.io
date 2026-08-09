@@ -238,6 +238,10 @@ const HeroSection = () => {
                                         <span className='text-emerald-500 dark:text-emerald-400'>
                                             &apos;Laravel&apos;
                                         </span>
+                                        <span className='text-muted-foreground'>, </span>
+                                        <span className='text-emerald-500 dark:text-emerald-400'>
+                                            &apos;Docker&apos;
+                                        </span>
                                         <span className='text-muted-foreground'>],</span>
                                         {'\n'}
                                         {'  '}
@@ -253,6 +257,10 @@ const HeroSection = () => {
                                         <span className='text-muted-foreground'>, </span>
                                         <span className='text-emerald-500 dark:text-emerald-400'>
                                             &apos;RPA&apos;
+                                        </span>
+                                        <span className='text-muted-foreground'>, </span>
+                                        <span className='text-emerald-500 dark:text-emerald-400'>
+                                            &apos;DevOps&apos;
                                         </span>
                                         <span className='text-muted-foreground'>],</span>
                                         {'\n'}

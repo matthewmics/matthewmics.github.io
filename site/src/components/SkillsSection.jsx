@@ -30,10 +30,15 @@ const skills = [
     { name: 'Cypress', level: 75, category: 'automation' },
     { name: 'Selenium WebDriver', level: 65, category: 'automation' },
 
+    //devops
+    { name: 'Docker', level: 70, category: 'devops' },
+    { name: 'CI/CD', level: 70, category: 'devops' },
+    { name: 'AWS', level: 60, category: 'devops' },
+    { name: 'DigitalOcean', level: 65, category: 'devops' },
+    { name: 'GitHub Container Registry', level: 65, category: 'devops' },
+
     //tools
     { name: 'Git/GitHub', level: 85, category: 'tools' },
-    { name: 'Docker', level: 70, category: 'tools' },
-    { name: 'AWS', level: 60, category: 'tools' },
     { name: 'CPanel', level: 65, category: 'tools' },
     { name: 'VS Code', level: 80, category: 'tools' },
     { name: 'Postman', level: 75, category: 'tools' },
@@ -45,6 +50,7 @@ const categories = [
     { id: 'backend', name: 'Backend' },
     { id: 'mobile', name: 'Mobile' },
     { id: 'automation', name: 'Automation' },
+    { id: 'devops', name: 'DevOps' },
     { id: 'tools', name: 'Tools' },
 ]
 

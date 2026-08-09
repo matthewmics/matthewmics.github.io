@@ -1,4 +1,4 @@
-import { ArrowRight, Code, Cog, Download, TabletSmartphone } from 'lucide-react'
+import { ArrowRight, Code, Cog, Container, Download, TabletSmartphone } from 'lucide-react'
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
 
@@ -18,6 +18,12 @@ const focusAreas = [
         icon: Cog,
         title: 'Robotic Process Automation',
         description: 'Automating repetitive tasks and business processes using modern RPA tools.',
+    },
+    {
+        icon: Container,
+        title: 'DevOps',
+        description:
+            'Setting up CI/CD pipelines and configuring Docker on servers, deployed on AWS and DigitalOcean using GitHub Container Registry.',
     },
 ]
 
@@ -42,8 +48,9 @@ const AboutMe = () => {
                                 and robotic process automation (RPA) applications that are not only
                                 functional but also user-friendly and visually appealing. My
                                 expertise spans a variety of technologies, including JavaScript,
-                                React, Node.js, C#, and more. I thrive on turning complex problems
-                                into simple, beautiful solutions.
+                                React, Node.js, C#, and more, along with the DevOps side: CI/CD
+                                pipelines and Docker deployments on AWS and DigitalOcean. I thrive
+                                on turning complex problems into simple, beautiful solutions.
                             </p>
                         </Reveal>
 

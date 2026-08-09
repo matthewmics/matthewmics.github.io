@@ -35,8 +35,8 @@ const Footer = () => {
                             </span>
                         </a>
                         <p className='mt-4 text-sm text-pretty text-muted-foreground'>
-                            Full-stack developer building web, mobile, and automation software.
-                            Always up for an interesting problem.
+                            Full-stack developer building web, mobile, automation, and DevOps
+                            tooling. Always up for an interesting problem.
                         </p>
                     </div>
 
