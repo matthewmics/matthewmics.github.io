@@ -89,7 +89,7 @@ const ContactSection = () => {
                     description="Feel free to reach out. I'm open to opportunities, collaborations, or just a friendly chat!"
                 />
 
-                <div className='mx-auto mt-16 grid max-w-5xl gap-8 lg:grid-cols-5'>
+                <div className='mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-8 lg:grid-cols-5'>
                     {/* Details */}
                     <div className='flex flex-col gap-4 lg:col-span-2'>
                         {contactDetails.map(({ icon: Icon, label, value, href }, index) => (

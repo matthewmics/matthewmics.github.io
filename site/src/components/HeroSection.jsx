@@ -57,7 +57,7 @@ const HeroSection = () => {
             className='relative flex min-h-svh items-center overflow-hidden pt-28 pb-20 md:pt-32'
         >
             <div className='container'>
-                <div className='grid items-center gap-12 lg:grid-cols-12 lg:gap-8'>
+                <div className='grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8'>
                     {/* ---- Copy ---- */}
                     <div className='flex flex-col items-center text-center lg:col-span-7 lg:items-start lg:text-left'>
                         <motion.span

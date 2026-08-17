@@ -10,6 +10,12 @@ const focusAreas = [
             'Building responsive and accessible web applications with modern frameworks.',
     },
     {
+        icon: Container,
+        title: 'DevOps',
+        description:
+            'Setting up CI/CD pipelines and configuring Docker on servers, deployed on AWS and DigitalOcean using GitHub Container Registry.',
+    },
+    {
         icon: TabletSmartphone,
         title: 'Mobile Development',
         description: 'Creating seamless mobile experiences for both iOS and Android platforms.',
@@ -19,12 +25,6 @@ const focusAreas = [
         title: 'Robotic Process Automation',
         description: 'Automating repetitive tasks and business processes using modern RPA tools.',
     },
-    {
-        icon: Container,
-        title: 'DevOps',
-        description:
-            'Setting up CI/CD pipelines and configuring Docker on servers, deployed on AWS and DigitalOcean using GitHub Container Registry.',
-    },
 ]
 
 const AboutMe = () => {
@@ -33,7 +33,7 @@ const AboutMe = () => {
             <div className='container'>
                 <SectionHeading eyebrow='About' title='About' highlight='Me' />
 
-                <div className='mt-16 grid items-start gap-12 lg:grid-cols-2 lg:gap-16'>
+                <div className='mt-16 grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16'>
                     {/* Narrative */}
                     <div className='text-left'>
                         <Reveal>
